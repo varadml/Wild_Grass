@@ -1,15 +1,28 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import "./Login.css"
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword,onAuthStateChanged } from 'firebase/auth';
+import { db } from '../../firebase';
 
 import { auth } from "../../firebase"
-import { useNavigate } from 'react-router-dom';
+import Signup from '../Signup/Signup';
+import { Router, Routes, useNavigate,Route,Link} from 'react-router-dom';
+
 
 const Login = () => {
     const [error, setError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+   // const navigate = useNavigate();
+
+    const[cuser,setuser]=useState({});
+    // onAuthStateChanged(auth,(currentUser) =>{
+    //   setuser(currentUser); 
+    //  })
+    useEffect(() => {
+      onAuthStateChanged(auth,(currentUser) =>{
+        setuser(currentUser); 
+       });
+      },[])
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -18,7 +31,10 @@ const Login = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user)
-                navigate('/')
+               
+
+
+                
             })
             .catch((error) => {
                 console.log(error)
@@ -26,9 +42,17 @@ const Login = () => {
             });
     };
 
+      const handleCreateAccount=()=>{
+        // navigate("/");
+    }
+    
 
     return (
         <div className='Outer'>
+            {/* <Routes>
+            <Route path={navigate("/")} element={<Signup />} />
+            </Routes>
+           */}
             <div className="login">
                 <div>
                     <h1>Login</h1>
@@ -37,8 +61,10 @@ const Login = () => {
                         <p>_</p>
                         <input type="password" placeholder='password' onChange={e => setPassword(e.target.value)}></input>
                         <button type="submit">Login</button>
+                       
                         {error && <span>Credentials do not match! </span>}
                     </form>
+                    <h4>New here? <button onClick={handleCreateAccount}>Create Account</button></h4>
                 </div>
             </div>
         </div>
