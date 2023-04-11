@@ -1,0 +1,59 @@
+.Conatainer{
+display: inline-flex;
+    
+}
+.Side-nav{
+    width:25%;
+    height: fit-content;
+    margin-left: 0;
+    /* border: 10px solid rgb(205, 74, 18); */
+    float: left;
+
+    
+    
+}
+
+.Profile-head{
+    border: 10px solid black;
+    height: fit-content;
+    padding: 5%;
+
+}
+.plabel{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+    vertical-align:middle;
+    padding: 5%;
+    /* border: 10px solid rgb(33, 205, 18); */
+}
+.profileimg{
+
+    width: 4rem;
+    height: 4rem;
+     display: inline-block;
+     margin-right: 7px;
+     
+ }
+
+
+ .NavLinks{
+display: flex;
+
+justify-content: space-evenly;
+
+ }
+ .NavLinks li{
+    list-style: none;
+    margin: 4rem 0;
+ }
+
+
+ .Display-info{
+width: 75%;
+height: 50rem;
+
+float: left;
+background-color: rgb(244, 244, 244);
+ }

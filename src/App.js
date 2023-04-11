@@ -17,11 +17,14 @@ function App() {
     onAuthStateChanged(auth,(currentUser) =>{
       setuser(currentUser); 
      });
-    })
+    },[])
     console.log(user);
   return (
     <div className="App">
-      {!user?    <Home1/>:<Home2/>}
+      <Router>
+      {user?    <Home/>:<Login/>}
+      </Router>
+      
 
 
     </div>

@@ -3,10 +3,13 @@ import { getAuth, signOut ,onAuthStateChanged}
     from "firebase/auth";
 import "./Home.css"
 import Login from '../Login/Login';
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes , useNavigate,Link,Route } from 'react-router-dom';
 import { doc, getDoc } from "firebase/firestore";
+import Home2 from '../Home2/Home2';
+
 
 import { db } from '../../firebase';
+import Profile from '../Profile/Profile';
 
 
 
@@ -18,11 +21,11 @@ const Home = () => {
     // onAuthStateChanged(auth,(currentUser) =>{
     //   setuser(currentUser); 
     //  })
-    useEffect(() => {
+    
       onAuthStateChanged(auth,(currentUser) =>{
         setuser(currentUser); 
        });
-      },[])
+      
     //console.log(auth.currentUser);
     const getd=async()=>{
         const docRef = doc(db, "userinfo", auth.currentUser.uid);
@@ -36,33 +39,46 @@ const Home = () => {
         }
     }
    getd();
-    const Logout =async()=> {
+    // const Logout =async()=> {
     
         
-         await signOut(auth).then(() => {
-            // Sign-out successful.
+    //      await signOut(auth).then(() => {
+    //         // Sign-out successful.
      
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
     return (
-        <div>
+        <>
+            
+                
+                    
+                
+          
+     
             <div className="Navbar">
                 <div>
                     <div class="topnav">
 
-                        <a class="active" href="#home">Home</a>
+                        <a class="active"><Link to="back">Home</Link></a>
                         <a href="#news">News</a>
                         <a href="#contact">Contact</a>
                         <a href="#about">About</a>
-                        <button className='butt' onClick={Logout} >Sign out</button>
+                        {/* <button className='butt' onClick={Logout} >Sign out</button> */}
+                        <Link to="/coffee"><i class="fa-solid fa-user"></i></Link>
                     </div>
                 </div>
+              
+                <Routes>
+                
+                <Route path="/coffee" Component={Profile} />
+                </Routes>
 
 
             </div>
-        </div >
+            
+        </ >
     )
 }
 
